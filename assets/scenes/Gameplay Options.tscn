@@ -1,0 +1,89 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/scenes/FNF Text.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/scenes/FNF Button Scroller.gd" type="Script" id=2]
+[ext_resource path="res://assets/scenes/Gameplay Options.gd" type="Script" id=3]
+[ext_resource path="res://assets/scenes/FNF Button.tscn" type="PackedScene" id=4]
+
+[node name="Gameplay Options" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FNF Button Scroller" type="VBoxContainer" parent="."]
+margin_left = 130.206
+margin_top = 284.811
+margin_right = 704.206
+margin_bottom = 752.811
+rect_scale = Vector2( 1.4, 1.4 )
+custom_constants/separation = 99
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+first_option = NodePath("Scrolling and Offset Button")
+
+[node name="FNF Text" parent="FNF Button Scroller" instance=ExtResource( 1 )]
+visible = false
+margin_right = 1033.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 1033, 70 )
+text = "scrolling and offset"
+
+[node name="Gameplay Options Button" type="Button" parent="FNF Button Scroller/FNF Text"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FNF Text2" parent="FNF Button Scroller" instance=ExtResource( 1 )]
+visible = false
+margin_right = 409.0
+margin_bottom = 69.0
+rect_min_size = Vector2( 409, 69 )
+text = "CONTROLS"
+
+[node name="Controls Button" type="Button" parent="FNF Button Scroller/FNF Text2"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FNF Text3" parent="FNF Button Scroller" instance=ExtResource( 1 )]
+visible = false
+margin_top = 337.0
+margin_right = 215.0
+margin_bottom = 403.0
+rect_min_size = Vector2( 215, 66 )
+text = "misc"
+
+[node name="Button" type="Button" parent="FNF Button Scroller/FNF Text3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Scrolling and Offset Button" parent="FNF Button Scroller" instance=ExtResource( 4 )]
+margin_right = 1033.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 1033, 70 )
+text = "Scrolling and offset"
+
+[node name="Controls Button" parent="FNF Button Scroller" instance=ExtResource( 4 )]
+margin_top = 169.0
+margin_right = 409.0
+margin_bottom = 238.0
+rect_min_size = Vector2( 409, 69 )
+text = "Controls"
+
+[connection signal="pressed" from="FNF Button Scroller/Scrolling and Offset Button" to="." method="_on_Scrolling_and_Offset_Button_pressed"]
+[connection signal="pressed" from="FNF Button Scroller/Controls Button" to="." method="_on_Controls_Button_pressed"]

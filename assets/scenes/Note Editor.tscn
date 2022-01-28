@@ -1,0 +1,1136 @@
+[gd_scene load_steps=31 format=2]
+
+[ext_resource path="res://assets/images/NOTE_assets/arrowRIGHT0000.png" type="Texture" id=1]
+[ext_resource path="res://assets/scenes/notes/Editor Note Track.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/scenes/Note Editor.gd" type="Script" id=3]
+[ext_resource path="res://assets/scenes/GUI Input Area.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/scenes/Note Track Audio Buttons.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/scenes/Lane Area.gd" type="Script" id=6]
+[ext_resource path="res://assets/scenes/Waveform Visualizer.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/scenes/Audio Waveforms.gd" type="Script" id=8]
+[ext_resource path="res://assets/images/debug_texture.png" type="Texture" id=9]
+[ext_resource path="res://assets/scenes/Editor Cursors.gd" type="Script" id=10]
+[ext_resource path="res://assets/scenes/Snapping Grid.gd" type="Script" id=11]
+[ext_resource path="res://assets/scenes/notes/Editor Note Sets.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/scenes/Cursor Line.gd" type="Script" id=13]
+[ext_resource path="res://assets/images/note import buttton homie.png" type="Texture" id=14]
+[ext_resource path="res://assets/fonts/Consola.tres" type="DynamicFontData" id=15]
+[ext_resource path="res://assets/images/exit button duuude.png" type="Texture" id=16]
+[ext_resource path="res://assets/images/questions boiiis.png" type="Texture" id=17]
+[ext_resource path="res://assets/scenes/Help Popups.gd" type="Script" id=18]
+[ext_resource path="res://assets/scenes/Editor Mode Buttons.tscn" type="PackedScene" id=19]
+[ext_resource path="res://assets/scenes/Drawing Waveforms Popup.gd" type="Script" id=20]
+[ext_resource path="res://assets/characters/boyfriend/Boyfriend Icon.png" type="Texture" id=21]
+[ext_resource path="res://assets/scenes/Right Click Menu.gd" type="Script" id=22]
+[ext_resource path="res://assets/scenes/Swap Notes UI.tscn" type="PackedScene" id=23]
+[ext_resource path="res://assets/scenes/Track UI.gd" type="Script" id=24]
+[ext_resource path="res://assets/scenes/Retime Tempo UI.tscn" type="PackedScene" id=25]
+[ext_resource path="res://assets/scenes/Extract Tempo.tscn" type="PackedScene" id=26]
+[ext_resource path="res://assets/scenes/Left Buttons.gd" type="Script" id=27]
+
+[sub_resource type="DynamicFont" id=1]
+use_filter = true
+font_data = ExtResource( 15 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 15 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 23
+use_filter = true
+font_data = ExtResource( 15 )
+
+[node name="Note Editor" type="Control" groups=["Chart Data Recievers", "Operation Recievers", "Song Time Recievers", "Track Visibility Recievers"]]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+zoom_speed = 0.001
+bpm = 240.0
+waveform = NodePath("Main UI/Track UI/Arrow Track Control/Audio Waveforms/Enemy Vocals/Position2D/Waveform Visualizer")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.12549, 0.12549, 0.12549, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Main UI" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 0.893
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Track UI" type="Control" parent="Main UI" groups=["Song Time Recievers", "Zoom Recievers"]]
+anchor_left = 0.05
+anchor_right = 0.95
+anchor_bottom = 1.0
+rect_clip_content = true
+script = ExtResource( 24 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Note Track Background" type="ColorRect" parent="Main UI/Track UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.309804, 0.309804, 0.309804, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Main UI/Track UI"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="Main UI/Track UI/HBoxContainer"]
+margin_bottom = 980.0
+
+[node name="CenterContainer" type="CenterContainer" parent="Main UI/Track UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ReferenceRect" type="ReferenceRect" parent="Main UI/Track UI"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+editor_only = false
+
+[node name="Arrow Track Control" type="Control" parent="Main UI/Track UI"]
+anchor_left = 0.19
+anchor_top = 0.1
+anchor_right = 0.81
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Audio Waveforms" type="Control" parent="Main UI/Track UI/Arrow Track Control" groups=["Audio Stream Recievers", "Song Time Recievers", "Track Visibility Recievers", "Zoom Recievers"]]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+size = 550.0
+
+[node name="Enemy Vocals" type="Control" parent="Main UI/Track UI/Arrow Track Control/Audio Waveforms"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Position2D" type="Position2D" parent="Main UI/Track UI/Arrow Track Control/Audio Waveforms/Enemy Vocals"]
+
+[node name="Waveform Visualizer" parent="Main UI/Track UI/Arrow Track Control/Audio Waveforms/Enemy Vocals/Position2D" instance=ExtResource( 7 )]
+scale = Vector2( 0.329, 1 )
+draw_progress_group = "Enemy Waveform Recievers"
+
+[node name="debug_texture" type="Sprite" parent="Main UI/Track UI/Arrow Track Control/Audio Waveforms/Enemy Vocals/Position2D/Waveform Visualizer"]
+visible = false
+show_behind_parent = true
+scale = Vector2( 1, 0.129 )
+texture = ExtResource( 9 )
+
+[node name="debug_texture" type="Sprite" parent="Main UI/Track UI/Arrow Track Control/Audio Waveforms/Enemy Vocals/Position2D"]
+visible = false
+texture = ExtResource( 9 )
+
+[node name="Instrumentals" type="Control" parent="Main UI/Track UI/Arrow Track Control/Audio Waveforms"]
+anchor_left = 0.5
+anchor_right = 0.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Position2D" type="Position2D" parent="Main UI/Track UI/Arrow Track Control/Audio Waveforms/Instrumentals"]
+
+[node name="debug_texture" type="Sprite" parent="Main UI/Track UI/Arrow Track Control/Audio Waveforms/Instrumentals/Position2D"]
+visible = false
+texture = ExtResource( 9 )
+
+[node name="Waveform Visualizer" parent="Main UI/Track UI/Arrow Track Control/Audio Waveforms/Instrumentals/Position2D" instance=ExtResource( 7 )]
+scale = Vector2( 0.218, 1 )
+draw_progress_group = "Instrumentals Waveform Recievers"
+
+[node name="Player Vocals" type="Control" parent="Main UI/Track UI/Arrow Track Control/Audio Waveforms"]
+anchor_left = 1.0
+anchor_right = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Position2D" type="Position2D" parent="Main UI/Track UI/Arrow Track Control/Audio Waveforms/Player Vocals"]
+
+[node name="Waveform Visualizer" parent="Main UI/Track UI/Arrow Track Control/Audio Waveforms/Player Vocals/Position2D" instance=ExtResource( 7 )]
+scale = Vector2( 0.329, 1 )
+draw_progress_group = "Player Waveform Recievers"
+
+[node name="debug_texture" type="Sprite" parent="Main UI/Track UI/Arrow Track Control/Audio Waveforms"]
+visible = false
+scale = Vector2( 1, 0.202 )
+texture = ExtResource( 9 )
+
+[node name="Enemy Track" type="Control" parent="Main UI/Track UI/Arrow Track Control"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="Main UI/Track UI/Arrow Track Control/Enemy Track"]
+visible = false
+texture = ExtResource( 1 )
+
+[node name="Position2D" type="Position2D" parent="Main UI/Track UI/Arrow Track Control/Enemy Track"]
+
+[node name="Editor Note Track" parent="Main UI/Track UI/Arrow Track Control/Enemy Track/Position2D" groups=["Chart Data Recievers", "Chart File Recievers", "Cursor Recievers", "Enemy Hit Recievers", "Note Clipboard Recievers", "Note Delete Recievers", "Note Editor Mode Recievers", "Operation Recievers", "Song Time Recievers", "Track Input Recievers", "Zoom Recievers"] instance=ExtResource( 2 )]
+track_name = "Enemy Track"
+
+[node name="Editor Note Sets" parent="Main UI/Track UI/Arrow Track Control/Enemy Track" instance=ExtResource( 12 )]
+modulate = Color( 1, 1, 1, 0.498039 )
+
+[node name="Player Track" type="Control" parent="Main UI/Track UI/Arrow Track Control"]
+anchor_left = 1.0
+anchor_right = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="Main UI/Track UI/Arrow Track Control/Player Track"]
+visible = false
+texture = ExtResource( 1 )
+
+[node name="Position2D" type="Position2D" parent="Main UI/Track UI/Arrow Track Control/Player Track"]
+
+[node name="Editor Note Track" parent="Main UI/Track UI/Arrow Track Control/Player Track/Position2D" groups=["Chart Data Recievers", "Chart File Recievers", "Cursor Recievers", "Enemy Hit Recievers", "Note Clipboard Recievers", "Note Delete Recievers", "Note Editor Mode Recievers", "Operation Recievers", "Song Time Recievers", "Track Input Recievers", "Zoom Recievers"] instance=ExtResource( 2 )]
+player_track = true
+track_name = "Player Track"
+
+[node name="Editor Note Sets" parent="Main UI/Track UI/Arrow Track Control/Player Track" instance=ExtResource( 12 )]
+modulate = Color( 1, 1, 1, 0.498039 )
+note_set_type = 1
+
+[node name="Track Input Areas" type="Control" parent="Main UI/Track UI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Enemy Track Area" type="Control" parent="Main UI/Track UI/Track Input Areas"]
+anchor_right = 0.38
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left Lane Area" type="Control" parent="Main UI/Track UI/Track Input Areas/Enemy Track Area" groups=["Cursor Recievers"]]
+anchor_right = 0.255
+anchor_bottom = 1.0
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GUI Input Area" parent="Main UI/Track UI/Track Input Areas/Enemy Track Area/Left Lane Area" instance=ExtResource( 4 )]
+
+[node name="Down Lane Area" type="Control" parent="Main UI/Track UI/Track Input Areas/Enemy Track Area"]
+anchor_left = 0.255
+anchor_right = 0.5
+anchor_bottom = 1.0
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+lane_type = 1
+
+[node name="GUI Input Area" parent="Main UI/Track UI/Track Input Areas/Enemy Track Area/Down Lane Area" instance=ExtResource( 4 )]
+
+[node name="Up Lane Area" type="Control" parent="Main UI/Track UI/Track Input Areas/Enemy Track Area"]
+anchor_left = 0.5
+anchor_right = 0.745
+anchor_bottom = 1.0
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+lane_type = 2
+
+[node name="GUI Input Area" parent="Main UI/Track UI/Track Input Areas/Enemy Track Area/Up Lane Area" instance=ExtResource( 4 )]
+
+[node name="Right Lane Area" type="Control" parent="Main UI/Track UI/Track Input Areas/Enemy Track Area"]
+anchor_left = 0.745
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+lane_type = 3
+
+[node name="GUI Input Area" parent="Main UI/Track UI/Track Input Areas/Enemy Track Area/Right Lane Area" instance=ExtResource( 4 )]
+
+[node name="GUI Input Area" parent="Main UI/Track UI/Track Input Areas/Enemy Track Area" instance=ExtResource( 4 )]
+
+[node name="Intrumental Track Area" type="Control" parent="Main UI/Track UI/Track Input Areas"]
+anchor_left = 0.38
+anchor_right = 0.62
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Instumental Track Input Area" parent="Main UI/Track UI/Track Input Areas/Intrumental Track Area" instance=ExtResource( 4 )]
+
+[node name="Player Track Area" type="Control" parent="Main UI/Track UI/Track Input Areas"]
+anchor_left = 0.62
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Left Lane Area" type="Control" parent="Main UI/Track UI/Track Input Areas/Player Track Area"]
+anchor_right = 0.255
+anchor_bottom = 1.0
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+track_type = 1
+
+[node name="GUI Input Area" parent="Main UI/Track UI/Track Input Areas/Player Track Area/Left Lane Area" instance=ExtResource( 4 )]
+
+[node name="Down Lane Area" type="Control" parent="Main UI/Track UI/Track Input Areas/Player Track Area"]
+anchor_left = 0.255
+anchor_right = 0.5
+anchor_bottom = 1.0
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+track_type = 1
+lane_type = 1
+
+[node name="GUI Input Area" parent="Main UI/Track UI/Track Input Areas/Player Track Area/Down Lane Area" instance=ExtResource( 4 )]
+
+[node name="Up Lane Area" type="Control" parent="Main UI/Track UI/Track Input Areas/Player Track Area"]
+anchor_left = 0.5
+anchor_right = 0.745
+anchor_bottom = 1.0
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+track_type = 1
+lane_type = 2
+
+[node name="GUI Input Area" parent="Main UI/Track UI/Track Input Areas/Player Track Area/Up Lane Area" instance=ExtResource( 4 )]
+
+[node name="Right Lane Area" type="Control" parent="Main UI/Track UI/Track Input Areas/Player Track Area"]
+anchor_left = 0.745
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+track_type = 1
+lane_type = 3
+
+[node name="GUI Input Area" parent="Main UI/Track UI/Track Input Areas/Player Track Area/Right Lane Area" instance=ExtResource( 4 )]
+
+[node name="GUI Input Area" parent="Main UI/Track UI/Track Input Areas/Player Track Area" instance=ExtResource( 4 )]
+
+[node name="GUI Input Area" parent="Main UI/Track UI" instance=ExtResource( 4 )]
+
+[node name="Editor Cursors" type="Control" parent="Main UI/Track UI" groups=["Cursor Recievers"]]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Editor Cursor" type="Position2D" parent="Main UI/Track UI/Editor Cursors"]
+
+[node name="X Editor Cursor" type="Position2D" parent="Main UI/Track UI/Editor Cursors"]
+
+[node name="Y Editor Cursor" type="Position2D" parent="Main UI/Track UI/Editor Cursors"]
+
+[node name="Cursor Line" type="Line2D" parent="Main UI/Track UI/Editor Cursors/Y Editor Cursor" groups=["Track Input Recievers"]]
+visible = false
+modulate = Color( 1, 1, 1, 0.498039 )
+points = PoolVector2Array( -1000, 0, 1000, 0 )
+script = ExtResource( 13 )
+
+[node name="Snapping Grid" type="Control" parent="Main UI/Track UI" groups=["Song Time Recievers", "Zoom Recievers"]]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+grid_line_color = Color( 0.862745, 0.862745, 0.862745, 1 )
+sub_grid_line_color = Color( 0.603922, 0.603922, 0.603922, 1 )
+note_editor_node = NodePath("../../..")
+
+[node name="Grid Start" type="Control" parent="Main UI/Track UI/Snapping Grid"]
+anchor_left = 0.5
+anchor_right = 0.5
+
+[node name="Grid End" type="Control" parent="Main UI/Track UI/Snapping Grid"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+
+[node name="Visible Time Start" type="Control" parent="Main UI/Track UI"]
+anchor_left = 0.5
+anchor_right = 0.5
+
+[node name="Visible Time End" type="Control" parent="Main UI/Track UI"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+
+[node name="Left Buttons" type="Control" parent="Main UI" groups=["Mouse Input Pass", "Song Time Recievers"]]
+anchor_right = 0.05
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 27 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Import Chart Button" type="Button" parent="Main UI/Left Buttons"]
+anchor_left = 0.1
+anchor_top = 0.16
+anchor_right = 0.9
+anchor_bottom = 0.273
+
+[node name="TextureRect" type="TextureRect" parent="Main UI/Left Buttons/Import Chart Button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 14 )
+expand = true
+stretch_mode = 6
+
+[node name="Shapping Button" type="CheckBox" parent="Main UI/Left Buttons"]
+anchor_top = 0.287
+anchor_right = 1.0
+anchor_bottom = 0.287
+pressed = true
+text = "Snapping"
+
+[node name="Grid Button" type="CheckBox" parent="Main UI/Left Buttons"]
+anchor_top = 0.317
+anchor_right = 1.0
+anchor_bottom = 0.347
+pressed = true
+text = "Grid"
+
+[node name="Hide During Playback Button" type="CheckBox" parent="Main UI/Left Buttons"]
+visible = false
+anchor_top = 0.473568
+anchor_right = 1.0
+anchor_bottom = 0.503568
+pressed = true
+text = "Hide Durin"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Control" type="Control" parent="Main UI/Left Buttons"]
+anchor_top = 0.352
+anchor_right = 1.0
+anchor_bottom = 0.394
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BPM Edit" type="LineEdit" parent="Main UI/Left Buttons/Control"]
+anchor_top = 0.45
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "120.0"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Main UI/Left Buttons/Control"]
+anchor_right = 1.0
+anchor_bottom = 0.45
+text = "BPM"
+align = 1
+
+[node name="Control2" type="Control" parent="Main UI/Left Buttons"]
+anchor_top = 0.406
+anchor_right = 1.0
+anchor_bottom = 0.444
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Snapping Offset Edit" type="LineEdit" parent="Main UI/Left Buttons/Control2"]
+anchor_top = 0.45
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "0.0"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Main UI/Left Buttons/Control2"]
+anchor_right = 1.0
+anchor_bottom = 0.45
+text = "Snap Offset"
+align = 1
+
+[node name="Control3" type="Control" parent="Main UI/Left Buttons"]
+anchor_top = 0.459577
+anchor_right = 1.0
+anchor_bottom = 0.497577
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Playback Speed Edit" type="LineEdit" parent="Main UI/Left Buttons/Control3"]
+anchor_top = 0.45
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "100.0"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Main UI/Left Buttons/Control3"]
+anchor_right = 1.0
+anchor_bottom = 0.45
+text = "Speed"
+align = 1
+
+[node name="Right Buttons" type="Control" parent="Main UI" groups=["Mouse Input Pass"]]
+anchor_left = 0.95
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Exit Button" type="Button" parent="Main UI/Right Buttons"]
+anchor_left = 0.2
+anchor_top = 0.01
+anchor_right = 0.8
+anchor_bottom = 0.083
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="TextureRect" type="TextureRect" parent="Main UI/Right Buttons/Exit Button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 16 )
+expand = true
+stretch_mode = 6
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Help Button" type="Button" parent="Main UI/Right Buttons"]
+anchor_left = 0.1
+anchor_top = 0.122
+anchor_right = 0.9
+anchor_bottom = 0.204
+
+[node name="TextureRect" type="TextureRect" parent="Main UI/Right Buttons/Help Button"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 17 )
+expand = true
+stretch_mode = 6
+
+[node name="Editor Mode Buttons" parent="Main UI/Right Buttons" instance=ExtResource( 19 )]
+anchor_left = 0.1
+anchor_top = 0.363
+anchor_right = 0.9
+anchor_bottom = 0.5
+
+[node name="Bottom Buttons" type="Control" parent="." groups=["Mouse Input Pass"]]
+anchor_top = 0.912
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="Bottom Buttons"]
+anchor_left = 0.05
+anchor_right = 0.95
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="Bottom Buttons/Control"]
+anchor_right = 0.38
+anchor_bottom = 1.0
+
+[node name="Note Track Audio Buttons" parent="Bottom Buttons/Control/Control" instance=ExtResource( 5 )]
+
+[node name="Control2" type="Control" parent="Bottom Buttons/Control"]
+anchor_left = 0.38
+anchor_right = 0.62
+anchor_bottom = 1.0
+
+[node name="Note Track Audio Buttons" parent="Bottom Buttons/Control/Control2" instance=ExtResource( 5 )]
+
+[node name="Control3" type="Control" parent="Bottom Buttons/Control"]
+anchor_left = 0.62
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Note Track Audio Buttons" parent="Bottom Buttons/Control/Control3" instance=ExtResource( 5 )]
+
+[node name="Popups" type="Control" parent="." groups=["Mouse Input Pass"]]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Enemy Vocals File Dialog" type="FileDialog" parent="Popups" groups=["Mouse Input Pass"]]
+margin_left = 739.687
+margin_top = 337.735
+margin_right = 1168.69
+margin_bottom = 745.735
+window_title = "Open a File"
+resizable = true
+mode = 0
+access = 2
+filters = PoolStringArray( "*.wav" )
+current_dir = "/Godot/XDX Engine/XDX-Engine"
+current_path = "/Godot/XDX Engine/XDX-Engine/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Instrumentals File Dialog" type="FileDialog" parent="Popups" groups=["Mouse Input Pass"]]
+margin_left = 739.687
+margin_top = 337.735
+margin_right = 1168.69
+margin_bottom = 745.735
+window_title = "Open a File"
+resizable = true
+mode = 0
+access = 2
+filters = PoolStringArray( "*.wav" )
+current_dir = "/Godot/XDX Engine/XDX-Engine"
+current_path = "/Godot/XDX Engine/XDX-Engine/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player Vocals File Dialog" type="FileDialog" parent="Popups" groups=["Mouse Input Pass"]]
+margin_left = 739.687
+margin_top = 337.735
+margin_right = 1168.69
+margin_bottom = 745.735
+window_title = "Open a File"
+resizable = true
+mode = 0
+access = 2
+filters = PoolStringArray( "*.wav" )
+current_dir = "/Godot/XDX Engine/XDX-Engine"
+current_path = "/Godot/XDX Engine/XDX-Engine/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Drawing Waveforms Dialouge" type="AcceptDialog" parent="Popups"]
+margin_left = 494.441
+margin_top = 289.173
+margin_right = 844.441
+margin_bottom = 557.173
+window_title = "Drawing"
+resizable = true
+
+[node name="Label2" type="Label" parent="Popups/Drawing Waveforms Dialouge"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -36.0
+text = "Drawing Waveforms
+This may take a few seconds"
+align = 1
+valign = 1
+
+[node name="Import Chart Dialouge" type="FileDialog" parent="Popups"]
+margin_left = 673.058
+margin_top = 309.543
+margin_right = 1077.06
+margin_bottom = 674.543
+window_title = "Open a File"
+resizable = true
+mode = 0
+access = 2
+filters = PoolStringArray( "*.json", "*.osu", "*.chart" )
+current_dir = "/Godot/XDX Engine/XDX-Engine"
+current_path = "/Godot/XDX Engine/XDX-Engine/"
+
+[node name="Enemy Volume Popup" type="PopupPanel" parent="Popups"]
+visible = true
+anchor_left = 0.2
+anchor_top = 0.84
+anchor_right = 0.38
+anchor_bottom = 0.88
+
+[node name="Label" type="Label" parent="Popups/Enemy Volume Popup"]
+anchor_left = 0.04
+anchor_top = 0.1
+anchor_right = 0.09
+anchor_bottom = 0.1
+margin_left = -9.824
+margin_top = -0.320007
+margin_right = 310.496
+margin_bottom = 34.8801
+text = "Enemy Vocals Volume"
+
+[node name="Enemy Volume Slider" type="HSlider" parent="Popups/Enemy Volume Popup"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = -17.6
+margin_right = -4.0
+margin_bottom = -4.0
+step = 0.0
+value = 100.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Instrumentals Volume Popup" type="PopupPanel" parent="Popups"]
+visible = true
+anchor_left = 0.419283
+anchor_top = 0.84
+anchor_right = 0.599283
+anchor_bottom = 0.88
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Popups/Instrumentals Volume Popup"]
+anchor_left = 0.04
+anchor_top = 0.1
+anchor_right = 0.09
+anchor_bottom = 0.1
+margin_left = -9.824
+margin_top = -0.320007
+margin_right = 310.496
+margin_bottom = 34.8801
+text = "Instrumentals Volume"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Instrumentals Volume Slider" type="HSlider" parent="Popups/Instrumentals Volume Popup"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = -17.6
+margin_right = -4.0
+margin_bottom = -4.0
+step = 0.0
+value = 100.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player Volume Popup" type="PopupPanel" parent="Popups"]
+visible = true
+anchor_left = 0.754179
+anchor_top = 0.84
+anchor_right = 0.934179
+anchor_bottom = 0.88
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Label" type="Label" parent="Popups/Player Volume Popup"]
+anchor_left = 0.04
+anchor_top = 0.1
+anchor_right = 0.09
+anchor_bottom = 0.1
+margin_left = -9.824
+margin_top = -0.320007
+margin_right = 310.496
+margin_bottom = 34.8801
+text = "Player Vocals Volume"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player Volume Slider" type="HSlider" parent="Popups/Player Volume Popup"]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = -17.6
+margin_right = -4.0
+margin_bottom = -4.0
+step = 0.0
+value = 100.0
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Help Popups" type="Control" parent="Popups" groups=["Mouse Input Ignore"]]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+input_pass_on_modal_close_click = false
+script = ExtResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Help" type="WindowDialog" parent="Popups/Help Popups"]
+visible = true
+margin_left = 815.0
+margin_top = 267.0
+margin_right = 1239.0
+margin_bottom = 385.0
+popup_exclusive = true
+window_title = "Help"
+resizable = true
+
+[node name="Control" type="Control" parent="Popups/Help Popups/Help"]
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.95
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Popups/Help Popups/Help/Control"]
+anchor_right = 1.0
+custom_fonts/font = SubResource( 1 )
+text = "This editor is in Alpha 1.4.0
+Alot of it probably doesn't work or isn't here yet
+UNDO IS HERE!!! (MAY STILL BE BUGGY)"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Controls Button" type="Button" parent="Popups/Help Popups/Help/Control"]
+anchor_top = 0.75
+anchor_right = 0.5
+anchor_bottom = 1.0
+text = "Controls"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="How To Button" type="Button" parent="Popups/Help Popups/Help/Control"]
+anchor_left = 0.526813
+anchor_top = 0.75
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "How To"
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Controls" type="WindowDialog" parent="Popups/Help Popups"]
+margin_left = 314.0
+margin_top = 190.0
+margin_right = 752.0
+margin_bottom = 417.0
+popup_exclusive = true
+window_title = "Controls"
+resizable = true
+
+[node name="Label" type="Label" parent="Popups/Help Popups/Controls"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 2 )
+text = "-Add Notes: Left Click
+-Remove Notes: Right Click
+-Add Hold Notes: Shift+Left Click
+-Play Audio: Space
+-Scrub Audio: Ctrl+Move mouse over audio track
+-Scroll: Left-Click drag on center track
+-Zoom: Shift+Left-Click drag on center track
+-Switch to Export Editor: Tab
+
+There is no undo"
+autowrap = true
+clip_text = true
+
+[node name="How To" type="WindowDialog" parent="Popups/Help Popups"]
+margin_left = 314.0
+margin_top = 190.0
+margin_right = 752.0
+margin_bottom = 417.0
+popup_exclusive = true
+window_title = "How To"
+resizable = true
+
+[node name="Label" type="Label" parent="Popups/Help Popups/How To"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 2 )
+text = "-Import a chart using the button on the left.
+-Import audio .wav files using the buttons on the bottom
+-Add/Remove Notes
+-Press \"Tab\" to go into the export editor
+-Make sure all the data looks good ig
+-export using button in the export editor
+yeah
+ig
+dun"
+autowrap = true
+clip_text = true
+
+[node name="LinkButton" type="LinkButton" parent="Popups/Help Popups/How To"]
+anchor_top = 0.871
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -1.52588e-05
+margin_bottom = -1.52588e-05
+custom_fonts/font = SubResource( 2 )
+text = "just go to the video tutorials its way better"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Exit Confirm" type="ConfirmationDialog" parent="Popups"]
+margin_left = 773.127
+margin_top = 356.597
+margin_right = 1248.13
+margin_bottom = 431.597
+window_title = "dog u sure tho?"
+resizable = true
+dialog_text = "There isn't any auto-saving yet so make sure it's all good before leaving,
+anything not exported to a chart file will be gone foreva
+do you want to exit??"
+
+[node name="Drawing Enemy Waveforms" type="Panel" parent="Popups" groups=["Enemy Waveform Recievers"]]
+visible = false
+margin_left = 255.628
+margin_top = 826.612
+margin_right = 598.628
+margin_bottom = 887.612
+script = ExtResource( 20 )
+label_node = NodePath("Control/Label")
+text = "Drawing Enemy Waveforms
+{CHUNKS}%"
+format_text = "CHUNKS"
+
+[node name="Control" type="Control" parent="Popups/Drawing Enemy Waveforms"]
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.95
+margin_left = -13.15
+margin_top = 0.95
+margin_right = 13.15
+margin_bottom = -0.950001
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Popups/Drawing Enemy Waveforms/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 3 )
+text = "Drawing Enemy Waveforms
+43.12%"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Drawing Instrumentals Waveforms" type="Panel" parent="Popups" groups=["Instrumentals Waveform Recievers"]]
+visible = false
+margin_left = 815.0
+margin_top = 814.0
+margin_right = 1140.0
+margin_bottom = 909.0
+script = ExtResource( 20 )
+label_node = NodePath("Control/Label")
+text = "Drawing Instrumentals Waveforms
+{CHUNKS}%"
+format_text = "CHUNKS"
+
+[node name="Control" type="Control" parent="Popups/Drawing Instrumentals Waveforms"]
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.95
+margin_left = -12.25
+margin_top = 0.6
+margin_right = 12.25
+margin_bottom = -0.599998
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Popups/Drawing Instrumentals Waveforms/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 3 )
+text = "Drawing Instrumentals Waveforms
+43.12%"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Drawing Player Waveforms" type="Panel" parent="Popups" groups=["Player Waveform Recievers"]]
+visible = false
+margin_left = 1334.64
+margin_top = 806.063
+margin_right = 1659.64
+margin_bottom = 866.063
+mouse_filter = 2
+input_pass_on_modal_close_click = false
+script = ExtResource( 20 )
+label_node = NodePath("Control/Label")
+text = "Drawing Player Waveforms
+{CHUNKS}%"
+format_text = "CHUNKS"
+
+[node name="Control" type="Control" parent="Popups/Drawing Player Waveforms"]
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.95
+margin_left = -12.25
+margin_top = 1.0
+margin_right = 12.25
+margin_bottom = -1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Popups/Drawing Player Waveforms/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 3 )
+text = "Drawing Enemy Waveforms
+43.12%"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right Click Popup0" type="Popup" parent="Popups"]
+margin_left = 1184.0
+margin_top = 435.0
+margin_right = 1379.0
+margin_bottom = 652.0
+
+[node name="Right Click Menu" type="PopupMenu" parent="Popups" groups=["Note Editor Mode Recievers"]]
+margin_left = 1457.71
+margin_top = 316.002
+margin_right = 1574.71
+margin_bottom = 413.002
+allow_search = true
+script = ExtResource( 22 )
+yeahtexture = ExtResource( 21 )
+
+[node name="Swap Notes UI" parent="Popups" groups=["Mouse Input Pass", "Operation Recievers"] instance=ExtResource( 23 )]
+mouse_filter = 1
+
+[node name="Retime Tempo UI" parent="Popups" groups=["Operation Recievers"] instance=ExtResource( 25 )]
+visible = false
+
+[node name="Extract Tempo UI" parent="Popups" groups=["Operation Recievers"] instance=ExtResource( 26 )]
+
+[connection signal="input_event" from="Main UI/Track UI/Track Input Areas/Enemy Track Area/Up Lane Area/GUI Input Area" to="Main UI/Track UI/Track Input Areas/Enemy Track Area/Up Lane Area" method="_on_GUI_Input_Area_input_event"]
+[connection signal="mouse_entered" from="Main UI/Track UI/Track Input Areas/Enemy Track Area/Up Lane Area/GUI Input Area" to="Main UI/Track UI/Track Input Areas/Enemy Track Area/Up Lane Area" method="_on_GUI_Input_Area_mouse_entered"]
+[connection signal="mouse_exited" from="Main UI/Track UI/Track Input Areas/Enemy Track Area/Up Lane Area/GUI Input Area" to="Main UI/Track UI/Track Input Areas/Enemy Track Area/Up Lane Area" method="_on_GUI_Input_Area_mouse_exited"]
+[connection signal="input_event" from="Main UI/Track UI/Track Input Areas/Enemy Track Area/Right Lane Area/GUI Input Area" to="Main UI/Track UI/Track Input Areas/Enemy Track Area/Right Lane Area" method="_on_GUI_Input_Area_input_event"]
+[connection signal="mouse_entered" from="Main UI/Track UI/Track Input Areas/Enemy Track Area/Right Lane Area/GUI Input Area" to="Main UI/Track UI/Track Input Areas/Enemy Track Area/Right Lane Area" method="_on_GUI_Input_Area_mouse_entered"]
+[connection signal="mouse_exited" from="Main UI/Track UI/Track Input Areas/Enemy Track Area/Right Lane Area/GUI Input Area" to="Main UI/Track UI/Track Input Areas/Enemy Track Area/Right Lane Area" method="_on_GUI_Input_Area_mouse_exited"]
+[connection signal="mouse_entered" from="Main UI/Track UI/Track Input Areas/Enemy Track Area/GUI Input Area" to="." method="_on_Enemy_Input_Area_mouse_entered"]
+[connection signal="input_event" from="Main UI/Track UI/Track Input Areas/Intrumental Track Area/Instumental Track Input Area" to="." method="_on_Instumental_Track_Input_Area_input_event"]
+[connection signal="mouse_entered" from="Main UI/Track UI/Track Input Areas/Intrumental Track Area/Instumental Track Input Area" to="." method="_on_Instumental_Track_Input_Area_mouse_entered"]
+[connection signal="mouse_exited" from="Main UI/Track UI/Track Input Areas/Intrumental Track Area/Instumental Track Input Area" to="." method="_on_Instumental_Track_Input_Area_mouse_exited"]
+[connection signal="mouse_entered" from="Main UI/Track UI/Track Input Areas/Player Track Area/GUI Input Area" to="." method="_on_Player_Input_Area_mouse_entered"]
+[connection signal="pressed" from="Main UI/Left Buttons/Import Chart Button" to="." method="_on_Import_Chart_Button_pressed"]
+[connection signal="toggled" from="Main UI/Left Buttons/Shapping Button" to="." method="_on_Shapping_Button_toggled"]
+[connection signal="toggled" from="Main UI/Left Buttons/Grid Button" to="." method="_on_Grid_Button_toggled"]
+[connection signal="text_entered" from="Main UI/Left Buttons/Control/BPM Edit" to="." method="_on_BPM_Edit_text_entered"]
+[connection signal="text_entered" from="Main UI/Left Buttons/Control/BPM Edit" to="Main UI/Left Buttons" method="_on_BPM_Edit_text_entered"]
+[connection signal="text_entered" from="Main UI/Left Buttons/Control2/Snapping Offset Edit" to="." method="_on_Snapping_Offset_Edit_text_entered"]
+[connection signal="text_entered" from="Main UI/Left Buttons/Control2/Snapping Offset Edit" to="Main UI/Left Buttons" method="_on_Snapping_Offset_Edit_text_entered"]
+[connection signal="text_entered" from="Main UI/Left Buttons/Control3/Playback Speed Edit" to="." method="_on_Playback_Speed_Edit_text_entered"]
+[connection signal="text_entered" from="Main UI/Left Buttons/Control3/Playback Speed Edit" to="Main UI/Left Buttons" method="_on_Playback_Speed_Edit_text_entered"]
+[connection signal="pressed" from="Main UI/Right Buttons/Exit Button" to="." method="_on_Exit_Button_pressed"]
+[connection signal="pressed" from="Main UI/Right Buttons/Help Button" to="Popups/Help Popups" method="_on_Help_Button_pressed"]
+[connection signal="pressed" from="Bottom Buttons/Control/Control/Note Track Audio Buttons/Control/Button4" to="." method="_on_Button4_pressed"]
+[connection signal="pressed" from="Bottom Buttons/Control/Control/Note Track Audio Buttons/Control2/Button2" to="." method="_on_enemy_waveform_hide"]
+[connection signal="pressed" from="Bottom Buttons/Control/Control/Note Track Audio Buttons/Control3/Button3" to="." method="_on_Button3_pressed"]
+[connection signal="pressed" from="Bottom Buttons/Control/Control2/Note Track Audio Buttons/Control/Button4" to="." method="_on_load_instrumentals"]
+[connection signal="pressed" from="Bottom Buttons/Control/Control2/Note Track Audio Buttons/Control2/Button2" to="." method="_on_instrumentals_waveform_hide"]
+[connection signal="pressed" from="Bottom Buttons/Control/Control2/Note Track Audio Buttons/Control3/Button3" to="." method="_on_instrumentals_volume_button_pressed"]
+[connection signal="pressed" from="Bottom Buttons/Control/Control3/Note Track Audio Buttons/Control/Button4" to="." method="_on_load_player_vocals_button_pressed"]
+[connection signal="pressed" from="Bottom Buttons/Control/Control3/Note Track Audio Buttons/Control2/Button2" to="." method="_on_player_waveform_hide"]
+[connection signal="pressed" from="Bottom Buttons/Control/Control3/Note Track Audio Buttons/Control3/Button3" to="." method="_on_player_volume_button_pressed"]
+[connection signal="file_selected" from="Popups/Enemy Vocals File Dialog" to="." method="_on_FileDialog_file_selected"]
+[connection signal="file_selected" from="Popups/Instrumentals File Dialog" to="." method="_on_Instrumentals_File_Dialog_file_selected"]
+[connection signal="file_selected" from="Popups/Player Vocals File Dialog" to="." method="_on_Player_Vocals_File_Dialog_file_selected"]
+[connection signal="file_selected" from="Popups/Import Chart Dialouge" to="." method="_on_Import_Chart_Dialouge_file_selected"]
+[connection signal="value_changed" from="Popups/Enemy Volume Popup/Enemy Volume Slider" to="." method="_on_Enemy_Volume_Slider_value_changed"]
+[connection signal="value_changed" from="Popups/Instrumentals Volume Popup/Instrumentals Volume Slider" to="." method="_on_Instrumentals_Volume_Slider_value_changed"]
+[connection signal="value_changed" from="Popups/Player Volume Popup/Player Volume Slider" to="." method="_on_Player_Volume_Slider_value_changed"]
+[connection signal="pressed" from="Popups/Help Popups/Help/Control/Controls Button" to="Popups/Help Popups" method="_on_Controls_Button_pressed"]
+[connection signal="pressed" from="Popups/Help Popups/Help/Control/How To Button" to="Popups/Help Popups" method="_on_How_To_Button_pressed"]
+[connection signal="pressed" from="Popups/Help Popups/How To/LinkButton" to="." method="_on_LinkButton_pressed"]
+[connection signal="confirmed" from="Popups/Exit Confirm" to="." method="_on_Exit_Confirm_confirmed"]
+[connection signal="id_pressed" from="Popups/Right Click Menu" to="Popups/Right Click Menu" method="_on_Right_Click_Menu_id_pressed"]
+
+[editable path="Bottom Buttons/Control/Control/Note Track Audio Buttons"]
+[editable path="Bottom Buttons/Control/Control2/Note Track Audio Buttons"]
+[editable path="Bottom Buttons/Control/Control3/Note Track Audio Buttons"]

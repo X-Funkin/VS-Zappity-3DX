@@ -1,0 +1,80 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/scenes/Chart Editor.gd" type="Script" id=1]
+[ext_resource path="res://assets/scenes/Editor Song Track.gd" type="Script" id=2]
+[ext_resource path="res://assets/scenes/Player Bar.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/scenes/Note Editor.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/scenes/Export Editor.tscn" type="PackedScene" id=5]
+
+[node name="Chart Editor" type="Node2D" groups=["Audio Stream Recievers", "Chart File Recievers", "Song Time Recievers", "Track Note Recievers"]]
+script = ExtResource( 1 )
+
+[node name="Player Audio Scrubbing Timer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="Enemy Audio Scrubbing Timer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="Enemy Vocals" type="AudioStreamPlayer" parent="."]
+
+[node name="Instumentals" type="AudioStreamPlayer" parent="." groups=["Song Time Recievers"]]
+script = ExtResource( 2 )
+
+[node name="Player Vocals" type="AudioStreamPlayer" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 1920, 1080 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Control" type="Control" parent="Control"]
+anchor_top = 0.049
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Note Editor" parent="Control/Control" instance=ExtResource( 4 )]
+
+[node name="Export Editor" parent="Control/Control" groups=["Chart Data Recievers", "Chart File Recievers"] instance=ExtResource( 5 )]
+visible = false
+
+[node name="Player Bar" parent="Control" instance=ExtResource( 3 )]
+anchor_bottom = 0.06
+
+[node name="Popups" type="Control" parent="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 1
+
+[node name="Save File Dialog" type="FileDialog" parent="Control/Popups"]
+visible = true
+margin_left = 438.0
+margin_top = 360.0
+margin_right = 829.0
+margin_bottom = 738.0
+window_title = "Save Chart File"
+dialog_text = "Save Chart (NOT THE SAME AS EXPORT A CHART JOSH)"
+filters = PoolStringArray( "*.chart" )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="timeout" from="Player Audio Scrubbing Timer" to="." method="_on_Player_Audio_Scrubbing_Timer_timeout"]
+[connection signal="timeout" from="Enemy Audio Scrubbing Timer" to="." method="_on_Enemy_Audio_Scrubbing_Timer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="file_selected" from="Control/Popups/Save File Dialog" to="." method="_on_Save_File_Dialog_file_selected"]
