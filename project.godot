@@ -189,6 +189,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/scenes/notes/Note Track.gd"
 }, {
+"base": "Control",
+"class": "OSWindow",
+"language": "GDScript",
+"path": "res://assets/scenes/OS Window.gd"
+}, {
 "base": "Arrow",
 "class": "RightArrow",
 "language": "GDScript",
@@ -281,6 +286,7 @@ _global_script_class_icons={
 "NoteEditor": "",
 "NoteLane": "",
 "NoteTrack": "",
+"OSWindow": "",
 "RightArrow": "res://assets/images/NOTE_assets/arrowRIGHT0000.png",
 "RightHoldNote": "",
 "RightNote": "res://assets/images/NOTE_assets/red0000.png",
